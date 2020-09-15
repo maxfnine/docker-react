@@ -6,3 +6,12 @@ before_install:
   - docker build -t maxfnine/docker-react -f Dockerfile.dev .
 script:
   - docker run -e CI=true maxfnine/docker-react npm run test
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "docker-react"
+  env: "DockerReact-env"
+  bucket_name: "elasticbeanstalk-us-east-2-073358271936"
+  bucket_path: "docker-react"
+  on:
+    branch: master
